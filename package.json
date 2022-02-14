@@ -1,0 +1,25 @@
+{
+  "name": "air-quality-app-1",
+  "version": "1.0.0",
+  "description": "#### Description: A web app to show weather and air pollution levels at the user's location and searched locations using data from multiple APIs <br /> <br />",
+  "private": "true",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexErdei73/air-quality-app-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexErdei73/air-quality-app-1/issues"
+  },
+  "homepage": "https://github.com/AlexErdei73/air-quality-app-1#readme",
+  "devDependencies": {
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
