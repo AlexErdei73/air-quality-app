@@ -24,12 +24,12 @@
 
 #### -a visual that that adapts to the level of particles in the air and allows users to visualize their air using points or CSS magic <br /> <br />
 
-### \*Ben will work on:
+### Ben will work on:
 
--mainly on the JS parts to work with the API(s) to gain the necessary data
+#### -mainly on the JS parts to work with the API(s) to gain the necessary data
 
-### _Alex will work on:_
+### Alex will work on:
 
--mainly on the UI part to gain input and show the output to the user
+#### -mainly on the UI part to gain input and show the output to the user
 
 ### _Expected deadline to finish project:_
