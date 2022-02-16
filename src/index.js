@@ -36,57 +36,63 @@ if (navigator.geolocation) {
 })};
 
 
-function getAPIData (request) {
+async function getAPIData (request) {
     //do an API request to get data about weather at the user's location
     if (request == "weather") {
-        let weatherURL = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=0fb9ebda5842e2a12a43af55c70d2e3f";
-        fetch(weatherURL, {mode: "cors"})
-        .then(function(response) {
-        return response.json();
-        })
-        .then(function(response) {
-            //log the weather api response to the console
-            //console.log(response);
-    
-            //set the weather reading to be what was found for the user's coordinates
-            weather = response.weather[0].description;
-        
-            //if the weather data was found, log it
-            if (weather != undefined) {
-                console.log("The current weather description for your location is " + weather + ".");
-            }
-            //if the weather data was not found, show an error
-            else {
-                console.log("Error: unable to get weather data for the user");
-            }
-        });
+      
+      let weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=0fb9ebda5842e2a12a43af55c70d2e3f";
+      
+      //get the current weather JSON from the API
+      let weatherJSON = await fetchJSON(weatherURL);
+            
+      //set the weather reading to be what was found for the user's coordinates
+      weather = weatherJSON.weather[0].description;
+      
+      //if the weather data was found, log it
+      if (weather != undefined) {
+        console.log("The current weather description for your location is " + weather + ".");
+      }
+      //if the weather data was not found, show an error
+      else {
+        console.log("Error: unable to get weather data for the user");
+      }
     }
     //do an API request to get data about pollution at the user's location
     else if (request = "pollution") {
-        let pollutionURL = "http://api.openweathermap.org/data/2.5/air_pollution?lat=" + lat + "&lon=" + lon + "&appid=0fb9ebda5842e2a12a43af55c70d2e3f";
-    
-        fetch(pollutionURL, {mode: "cors"})
-        .then(function(response) {
-        return response.json();
-        })
-        .then(function(response) {
-            //log the pollution api response to the console
-            //console.log(response);
-    
-            //set the pm2.5 reading to be what was found for the user's coordinates
-            pm2_5 = response.list[0].components.pm2_5;
+      
+      let pollutionURL = "https://api.openweathermap.org/data/2.5/air_pollution?lat=" + lat + "&lon=" + lon + "&appid=0fb9ebda5842e2a12a43af55c70d2e3f";
+      
+      //get the current pollution JSON from the API
+      let pollutionJSON = await fetchJSON(pollutionURL);
+      
+      //set the pm2.5 reading to be what was found for the user's coordinates
+      pm2_5 = pollutionJSON.list[0].components.pm2_5;
         
-            //if the pm2.5 data was found, log it
-            if (pm2_5 != undefined) {
-                console.log("The current pm2.5 reading for your location is " + pm2_5 + " μg/m3.");
-            }
-            //if the pm2.5 data was not found, show an error
-            else {
-                console.log("Error: unable to get pm2.5 data for the user");
-            }
-        });
+      //if the pm2.5 data was found, log it
+      if (pm2_5 != undefined) {
+        console.log("The current pm2.5 reading for your location is " + pm2_5 + " μg/m3.");
+      }
+      //if the pm2.5 data was not found, show an error
+      else {
+        console.log("Error: unable to get pm2.5 data for the user");
+      }
     }
 }
+
+//takes in the url with the API constraints and key and returns the JSON that comes back from the API call
+function fetchJSON (url) {
+
+    const JSON = fetch(url, {mode: "cors"}).then(function(response) {
+        //get the API response in the form of a JSON
+        return response.json();
+      }).catch(function(err) {
+        //log an error if the request failed
+        console.log(err);
+      });
+      return JSON;
+}
+
+
 
 
 
