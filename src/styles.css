@@ -36,8 +36,9 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  gap: 1em;
   border-radius: 0.5em;
-  padding: 1em;
+  padding: 0.5em;
   max-width: 600px;
 }
 
@@ -58,4 +59,23 @@ body {
 .openCityModalBtn:hover {
   color: #242424;
   background-color: rgb(243, 243, 243);
+}
+
+.info-section {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.location-data,
+.weather-data {
+  width: 50%;
+  padding: 0.5em;
+  border: 1px solid rgb(243, 243, 243);
+  border-radius: 0.5em;
+  margin: 0.5em;
+}
+
+h2 {
+  margin-top: 0;
 }
