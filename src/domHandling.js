@@ -11,6 +11,7 @@ const tempCelsiusDiv = document.querySelector(".temp-celsius");
 const tempFarenheitDiv = document.querySelector(".temp-farenheit");
 
 const pm2_5Div = document.querySelector(".pm2_5");
+const coverDiv = document.querySelector(".cover");
 
 export function render() {
   latitudeDiv.textContent = `latitude: ${lat}`;
@@ -24,4 +25,6 @@ export function render() {
   tempFarenheitDiv.textContent = `temperature (Farenheit):`;
 
   pm2_5Div.textContent = `pm2.5 particulate concentration: ${pm2_5}`;
+  const width = 300 - Math.round(pm2_5);
+  coverDiv.style.width = `${width}px`;
 }
