@@ -2,12 +2,29 @@ import { lat, lon, weather, pm2_5 } from "./index";
 
 const latitudeDiv = document.querySelector(".latitude");
 const longitudeDiv = document.querySelector(".longitude");
-const weatherDiv = document.querySelector("div.weather");
+const countryCodeDiv = document.querySelector(".country-code");
+const countryNameDiv = document.querySelector(".country-name");
+
+const cityDiv = document.querySelector(".city");
+const conditionDiv = document.querySelector(".condition");
+const tempCelsiusDiv = document.querySelector(".temp-celsius");
+const tempFarenheitDiv = document.querySelector(".temp-farenheit");
+
 const pm2_5Div = document.querySelector(".pm2_5");
+const coverDiv = document.querySelector(".cover");
 
 export function render() {
   latitudeDiv.textContent = `latitude: ${lat}`;
   longitudeDiv.textContent = `longitude: ${lon}`;
-  weatherDiv.textContent = `weather condition: ${weather}`;
+  countryCodeDiv.textContent = `country code:`;
+  countryNameDiv.textContent = `country:`;
+  cityDiv.textContent = `city:`;
+
+  conditionDiv.textContent = `condition: ${weather}`;
+  tempCelsiusDiv.textContent = `temperature (Celsius):`;
+  tempFarenheitDiv.textContent = `temperature (Farenheit):`;
+
   pm2_5Div.textContent = `pm2.5 particulate concentration: ${pm2_5}`;
+  const width = 300 - Math.round(pm2_5);
+  coverDiv.style.width = `${width}px`;
 }

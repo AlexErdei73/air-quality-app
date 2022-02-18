@@ -11,13 +11,33 @@
       <h1 class="title">Air Pollution</h1>
     </header>
     <main class="display">
-      <h2 class="item location">Location</h2>
-      <div class="item latitude"></div>
-      <div class="item longitude"></div>
-      <h2 class="item weather">Weather</h2>
-      <div class="item weather"></div>
-      <h2 class="item pollution">Pollution</h2>
-      <div class="item pm2_5"></div>
+      <section class="info-section">
+        <div class="location-data">
+          <h2 class="location">Location</h2>
+          <div class="latitude"></div>
+          <div class="longitude"></div>
+          <div class="country-code"></div>
+          <div class="country-name"></div>
+          <div class="city"></div>
+        </div>
+        <div class="weather-data">
+          <h2 class="weather">Weather</h2>
+          <div class="condition"></div>
+          <div class="temp-celsius"></div>
+          <div class="temp-farenheit"></div>
+        </div>
+      </section>
+      <section class="pollution-data">
+        <h2 class="item pollution">Pollution</h2>
+        <div class="item pm2_5"></div>
+        <div class="pollution-bar">
+          <img
+            src="./assets/pollution-bar.png"
+            alt="color bar to meter pm2.5 particulate concentration"
+          />
+          <div class="cover"></div>
+        </div>
+      </section>
       <button type="button" class="openCityModalBtn">Another City</button>
     </main>
     <!-- The site uses your build, so the script tag should point to it at the end of the body tag -->
