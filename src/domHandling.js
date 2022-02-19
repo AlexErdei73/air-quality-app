@@ -1,5 +1,3 @@
-import { lat, lon, weather, pm2_5 } from "./index";
-
 const latitudeDiv = document.querySelector(".latitude");
 const longitudeDiv = document.querySelector(".longitude");
 const countryCodeDiv = document.querySelector(".country-code");
@@ -13,16 +11,28 @@ const tempFarenheitDiv = document.querySelector(".temp-farenheit");
 const pm2_5Div = document.querySelector(".pm2_5");
 const coverDiv = document.querySelector(".cover");
 
-export function render() {
-  latitudeDiv.textContent = `latitude: ${lat}`;
-  longitudeDiv.textContent = `longitude: ${lon}`;
-  countryCodeDiv.textContent = `country code:`;
-  countryNameDiv.textContent = `country:`;
-  cityDiv.textContent = `city:`;
+export function render(appData) {
+  const {
+    coordinates,
+    countryCode,
+    countryName,
+    city,
+    weather,
+    tempF,
+    tempC,
+    pm2_5,
+  } = appData;
+  console.log(city, weather, tempC, pm2_5);
+  const { latitude, longitude } = coordinates;
+  latitudeDiv.textContent = `latitude: ${latitude}`;
+  longitudeDiv.textContent = `longitude: ${longitude}`;
+  countryCodeDiv.textContent = `country code: ${countryCode}`;
+  countryNameDiv.textContent = `country: ${countryName}`;
+  cityDiv.textContent = `city: ${city}`;
 
   conditionDiv.textContent = `condition: ${weather}`;
-  tempCelsiusDiv.textContent = `temperature (Celsius):`;
-  tempFarenheitDiv.textContent = `temperature (Farenheit):`;
+  tempCelsiusDiv.textContent = `temperature (Celsius): ${tempC}`;
+  tempFarenheitDiv.textContent = `temperature (Farenheit): ${tempF}`;
 
   pm2_5Div.textContent = `pm2.5 particulate concentration: ${pm2_5}`;
   const width = 300 - Math.round(pm2_5);
