@@ -3,12 +3,12 @@ import { render } from "./domHandling";
 
 const userData = {
   coordinates: {
-    latitude: 47.497913,
-    longitude: 19.040236,
+    latitude: 0,
+    longitude: 0,
   },
-  countryCode: "HUN",
-  countryName: "Hungary",
-  city: "Budapest",
+  countryCode: "",
+  countryName: "",
+  city: "",
   weather: "",
   tempF: 0,
   tempC: 0,
@@ -23,69 +23,78 @@ const apiQueryData = {
   API_KEY: "0fb9ebda5842e2a12a43af55c70d2e3f",
 };
 
-const newData = userData;
-
-function getUserLocation() {
-  let coordinates = new Promise(function (resolve, reject) {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        newData.coordinates = {
+function getCoordinates () {
+  const result = new Promise(function(resolve, reject) {
+    navigator.geolocation.getCurrentPosition(
+      position => { 
+        const coordinates = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         };
-        resolve(newData.coordinates);
-      });
-    }
-  })
-    .then((result) => {
-      return result;
-    })
-    .catch((e) => {
-      console.error(e.message, e.code);
-    });
-  return coordinates;
+        resolve(coordinates); },
+      error => { reject (error); });
+  });
+  return result;
 }
 
-function getUserWeather(url, coord, key) {
-  const weatherURL =
-    url + coord.latitude + "&lon=" + coord.longitude + "&appid=" + key;
-  fetch(weatherURL, { mode: "cors" })
-    .then((res) => res.json())
-    .then((data) => {
-      newData.countryCode = data.sys.country;
-      let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
-      newData.countryName = regionNames.of(data.sys.country);
-      newData.city = data.name;
-      newData.weather = data.weather[0].description;
-      newData.tempC = Math.round(data.main.temp - 273.15);
-      newData.tempF = Math.round((9 / 5) * newData.tempC + 32);
-    })
-    .catch((e) => console.error(e.message, e.code));
-}
-
-function getUserPollution(url, coord, key) {
-  const pollutionURL =
-    url + coord.latitude + "&lon=" + coord.longitude + "&appid=" + key;
-  fetch(pollutionURL, { mode: "cors" })
-    .then((res) => res.json())
-    .then((data) => {
-      newData.pm2_5 = data.list[0].components.pm2_5;
-    })
-    .catch((e) => console.error(e.message, e.code));
-}
-
-async function waitToLoad () {
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  render(newData);
-};
-
-render(userData); //we render fallback value first
-getUserLocation()
+function getUserWeather(url, key) {
+  return getCoordinates()
   .then((coord) => {
-    getUserWeather(apiQueryData.baseURLs.weather, coord, apiQueryData.API_KEY);
-    getUserPollution(apiQueryData.baseURLs.pollution, coord, apiQueryData.API_KEY);
-  })
-  .then(() => {
-    waitToLoad();
+      const weatherURL = url + coord.latitude + "&lon=" + coord.longitude + "&appid=" + key;
+    return fetch(weatherURL, { mode: "cors" })
+      .then((res) => res.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((e) => console.error(e.message, e.code));
+    })
+  .catch((e) => console.error(e.message, e.code));
+}
+
+function getUserPollution(url, key) {
+  return getCoordinates()
+  .then((coord) => {
+  const pollutionURL = url + coord.latitude + "&lon=" + coord.longitude + "&appid=" + key;
+  return fetch(pollutionURL, { mode: "cors" })
+    .then((res) => res.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((e) => console.error(e.message, e.code));
   })
   .catch((e) => console.error(e.message, e.code));
+}
+
+//render(userData); //we render fallback value first
+
+const weather = getUserWeather(apiQueryData.baseURLs.weather, apiQueryData.API_KEY)
+  .then((data) => {
+    const weatherData = userData;
+    weatherData.coordinates.latitude = data.coord.lat;
+    weatherData.coordinates.longitude = data.coord.lon;
+    console.log(data);
+    weatherData.countryCode = data.sys.country;
+    let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
+    weatherData.countryName = regionNames.of(data.sys.country);
+    weatherData.city = data.name;
+    weatherData.weather = data.weather[0].description;
+    weatherData.tempC = Math.round(data.main.temp - 273.15);
+    weatherData.tempF = Math.round((9 / 5) * weatherData.tempC + 32);
+    return weatherData;
+  })
+  .catch((e) => console.error(e.message, e.code));
+
+
+const pollution = getUserPollution(apiQueryData.baseURLs.pollution, apiQueryData.API_KEY)
+  .then((data) => {
+    const pm2_5 = data.list[0].components.pm2_5;
+    return pm2_5;
+  })
+  .catch((e) => console.error(e.message, e.code));
+
+
+Promise.all([weather, pollution]).then((values) => {
+  const newData = values[0];
+  newData.pm2_5 = values[1];
+  render(newData);
+});
