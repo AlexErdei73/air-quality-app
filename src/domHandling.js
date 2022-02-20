@@ -53,12 +53,5 @@ export function render(appData) {
       break;
   }
 }
-
-
-
-
-
-
-
   //const width = 300 - Math.round(pm2_5*1.4);
   //coverDiv.style.width = `${width}px`;
