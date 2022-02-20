@@ -52,13 +52,15 @@ function getUserWeather(url, coord, key) {
   fetch(weatherURL, { mode: "cors" })
     .then((res) => res.json())
     .then((data) => {
+      newData.countryCode = data.sys.country;
+      let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
+      newData.countryName = regionNames.of(data.sys.country);
+      newData.city = data.name;
       newData.weather = data.weather[0].description;
       newData.tempC = Math.round(data.main.temp - 273.15);
       newData.tempF = Math.round((9 / 5) * newData.tempC + 32);
     })
-    .catch((e) => {
-      console.error(e.message, e.code);
-    });
+    .catch((e) => console.error(e.message, e.code));
 }
 
 function getUserPollution(url, coord, key) {
@@ -69,25 +71,21 @@ function getUserPollution(url, coord, key) {
     .then((data) => {
       newData.pm2_5 = data.list[0].components.pm2_5;
     })
-    .catch((e) => {
-      console.error(e.message, e.code);
-    });
+    .catch((e) => console.error(e.message, e.code));
 }
+
+async function waitToLoad () {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  render(newData);
+};
 
 render(userData); //we render fallback value first
 getUserLocation()
   .then((coord) => {
     getUserWeather(apiQueryData.baseURLs.weather, coord, apiQueryData.API_KEY);
-    getUserPollution(
-      apiQueryData.baseURLs.pollution,
-      coord,
-      apiQueryData.API_KEY
-    );
+    getUserPollution(apiQueryData.baseURLs.pollution, coord, apiQueryData.API_KEY);
   })
   .then(() => {
-    console.log(newData.tempC);
-    setTimeout(render(newData), 1000); //we render the newData when it is ready
+    waitToLoad();
   })
-  .catch((e) => {
-    console.error(e.message, e.code);
-  });
+  .catch((e) => console.error(e.message, e.code));

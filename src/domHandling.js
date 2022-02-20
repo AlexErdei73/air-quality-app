@@ -22,7 +22,6 @@ export function render(appData) {
     tempC,
     pm2_5,
   } = appData;
-  console.log(city, weather, tempC, pm2_5);
   const { latitude, longitude } = coordinates;
   latitudeDiv.textContent = `latitude: ${latitude}`;
   longitudeDiv.textContent = `longitude: ${longitude}`;
@@ -35,6 +34,31 @@ export function render(appData) {
   tempFarenheitDiv.textContent = `temperature (Farenheit): ${tempF}`;
 
   pm2_5Div.textContent = `pm2.5 particulate concentration: ${pm2_5}`;
-  const width = 300 - Math.round(pm2_5);
-  coverDiv.style.width = `${width}px`;
+
+  switch(true) {
+    case pm2_5 > 12 && pm2_5 <= 35:
+      coverDiv.style.width = "200px";
+      break;
+    case pm2_5 > 35 && pm2_5 <= 55:
+      coverDiv.style.width = "170px";
+      break;
+    case pm2_5 > 55 && pm2_5 <= 150:
+      coverDiv.style.width = "90px";
+      break;
+    case pm2_5 > 150 && pm2_5 <= 250:
+      coverDiv.style.width = "50px";
+      break;
+    case pm2_5 > 250 && pm2_5 <= 500:
+      coverDiv.style.width = "0px";
+      break;
+  }
 }
+
+
+
+
+
+
+
+  //const width = 300 - Math.round(pm2_5*1.4);
+  //coverDiv.style.width = `${width}px`;
