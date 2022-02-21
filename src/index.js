@@ -15,7 +15,11 @@ const userData = {
   pm2_5: 0,
 };
 
-const apiQueryData = {
+const apiQuery = {
+  type: {
+    weather: "weather",
+    pollution: "pollution",
+  },
   baseURLs: {
     weather: "https://api.openweathermap.org/data/2.5/weather?lat=",
     pollution: "https://api.openweathermap.org/data/2.5/air_pollution?lat=",
@@ -37,42 +41,36 @@ function getCoordinates () {
   return result;
 }
 
-function getUserWeather(url, key) {
+function getData(url, key, query) {
   return getCoordinates()
   .then((coord) => {
+    if(query === "weather"){
       const weatherURL = url + coord.latitude + "&lon=" + coord.longitude + "&appid=" + key;
-    return fetch(weatherURL, { mode: "cors" })
-      .then((res) => res.json())
-      .then((data) => {
-        return data;
-      })
-      .catch((e) => console.error(e.message, e.code));
-    })
-  .catch((e) => console.error(e.message, e.code));
-}
-
-function getUserPollution(url, key) {
-  return getCoordinates()
-  .then((coord) => {
-  const pollutionURL = url + coord.latitude + "&lon=" + coord.longitude + "&appid=" + key;
-  return fetch(pollutionURL, { mode: "cors" })
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((e) => console.error(e.message, e.code));
+      return fetch(weatherURL, { mode: "cors" })
+        .then((res) => res.json())
+        .then((data) => {
+          return data;
+        })
+        .catch((e) => console.error(e.message, e.code));
+    }
+    else if (query === "pollution") {
+      const pollutionURL = url + coord.latitude + "&lon=" + coord.longitude + "&appid=" + key;
+      return fetch(pollutionURL, { mode: "cors" })
+        .then((res) => res.json())
+        .then((data) => {
+          return data;
+        })
+        .catch((e) => console.error(e.message, e.code));
+    }
   })
   .catch((e) => console.error(e.message, e.code));
 }
 
-//render(userData); //we render fallback value first
-
-const weather = getUserWeather(apiQueryData.baseURLs.weather, apiQueryData.API_KEY)
+getData(apiQuery.baseURLs.weather, apiQuery.API_KEY, apiQuery.type.weather)
   .then((data) => {
     const weatherData = userData;
     weatherData.coordinates.latitude = data.coord.lat;
     weatherData.coordinates.longitude = data.coord.lon;
-    console.log(data);
     weatherData.countryCode = data.sys.country;
     let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
     weatherData.countryName = regionNames.of(data.sys.country);
@@ -82,19 +80,16 @@ const weather = getUserWeather(apiQueryData.baseURLs.weather, apiQueryData.API_K
     weatherData.tempF = Math.round((9 / 5) * weatherData.tempC + 32);
     return weatherData;
   })
-  .catch((e) => console.error(e.message, e.code));
-
-
-const pollution = getUserPollution(apiQueryData.baseURLs.pollution, apiQueryData.API_KEY)
   .then((data) => {
-    const pm2_5 = data.list[0].components.pm2_5;
-    return pm2_5;
+    return getData(apiQuery.baseURLs.pollution, apiQuery.API_KEY, apiQuery.type.weather)
+    .then((pollutionData) => {
+      data.pm2_5 = pollutionData.list[0].components.pm2_5;
+      return data;
+    })
+    .catch((e) => console.error(e.message, e.code));
+  })
+  .then((finalData) => {
+    render(finalData);
   })
   .catch((e) => console.error(e.message, e.code));
-
-
-Promise.all([weather, pollution]).then((values) => {
-  const newData = values[0];
-  newData.pm2_5 = values[1];
-  render(newData);
-});
+  
