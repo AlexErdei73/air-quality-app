@@ -39,7 +39,7 @@ body {
   gap: 1em;
   border-radius: 0.5em;
   padding: 0.5em;
-  max-width: 600px;
+  max-width: 500px;
 }
 
 .item {
@@ -109,13 +109,14 @@ body {
 
 .content {
   color: #242424;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-.size-comparision-image {
-  width: 50%;
+.size-comparison-image {
+  width: 100%;
   height: auto;
-  float: right;
-  margin-left: 0.5em;
+  border-radius: 0.5em;
 }
 
 ul {
@@ -129,4 +130,22 @@ li > a {
 
 li > a:hover {
   color: rgb(97, 11, 109);
+}
+
+@media (min-width: 992px) {
+  main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2em;
+  }
+
+  .display {
+    margin: 7em 0 0 0;
+    width: 500px;
+  }
+
+  .content {
+    margin: 7em 0 0 0;
+  }
 }
