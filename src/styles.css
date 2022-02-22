@@ -8,7 +8,7 @@ body {
   background-image: url("../assets/weather-background.jpg");
   background-color: #242424;
   background-position: center;
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -76,7 +76,9 @@ body {
   margin: 0.5em;
 }
 
-h2 {
+.location,
+.weather,
+.polution {
   margin-top: 0;
 }
 
@@ -103,4 +105,28 @@ h2 {
   width: 255px;
   background: rgb(243, 243, 243);
   z-index: 10;
+}
+
+.content {
+  color: #242424;
+}
+
+.size-comparision-image {
+  width: 50%;
+  height: auto;
+  float: right;
+  margin-left: 0.5em;
+}
+
+ul {
+  list-style: none;
+}
+
+li > a {
+  text-decoration: none;
+  color: black;
+}
+
+li > a:hover {
+  color: rgb(97, 11, 109);
 }

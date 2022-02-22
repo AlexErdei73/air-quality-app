@@ -10,35 +10,88 @@
     <header class="header">
       <h1 class="title">Air Pollution</h1>
     </header>
-    <main class="display">
-      <section class="info-section">
-        <div class="location-data">
-          <h2 class="location">Location</h2>
-          <div class="latitude"></div>
-          <div class="longitude"></div>
-          <div class="country-code"></div>
-          <div class="country-name"></div>
-          <div class="city"></div>
-        </div>
-        <div class="weather-data">
-          <h2 class="weather">Weather</h2>
-          <div class="condition"></div>
-          <div class="temp-celsius"></div>
-          <div class="temp-farenheit"></div>
-        </div>
+    <main>
+      <section class="display">
+        <section class="info-section">
+          <div class="location-data">
+            <h2 class="location">Location</h2>
+            <div class="latitude"></div>
+            <div class="longitude"></div>
+            <div class="country-code"></div>
+            <div class="country-name"></div>
+            <div class="city"></div>
+          </div>
+          <div class="weather-data">
+            <h2 class="weather">Weather</h2>
+            <div class="condition"></div>
+            <div class="temp-celsius"></div>
+            <div class="temp-farenheit"></div>
+          </div>
+        </section>
+        <section class="pollution-data">
+          <h2 class="item pollution">Pollution</h2>
+          <div class="item pm2_5"></div>
+          <div class="pollution-bar">
+            <img
+              src="./assets/pollution-bar.png"
+              alt="color bar to meter pm2.5 particulate concentration"
+            />
+            <div class="cover"></div>
+          </div>
+        </section>
+        <button type="button" class="openCityModalBtn">Another City</button>
       </section>
-      <section class="pollution-data">
-        <h2 class="item pollution">Pollution</h2>
-        <div class="item pm2_5"></div>
-        <div class="pollution-bar">
+      <article class="content">
+        <h2>What is PM2.5?</h2>
+        <p>
           <img
-            src="./assets/pollution-bar.png"
-            alt="color bar to meter pm2.5 particulate concentration"
+            class="size-comparision-image"
+            src="./assets/pm2.5_scale_graphic-color_2.jpg"
+            alt="image comparing particle sizes to the human hair"
           />
-          <div class="cover"></div>
-        </div>
-      </section>
-      <button type="button" class="openCityModalBtn">Another City</button>
+          This is a measure of the concentration of fine inhalable solid
+          particles or droplets, with diameters that are generally 2.5
+          micrometers and smaller. How small is 2.5 micrometers? Think about a
+          single hair from your head. The average human hair is about 70
+          micrometers in diameter – making it 30 times larger than the largest
+          fine particle.
+        </p>
+        <h2>What is the source of PM2.5?</h2>
+        <p>
+          The main source of air pollution including PM2.5 is human activities
+          like industry and transportation. There are natural sources, which can
+          be important in certain situations, but the main cause is our
+          activities.
+        </p>
+        <h2>Why is high PM2.5 dangerous?</h2>
+        <p>
+          Any kind of air pollution is dangerous to our health. PM2.5 is the
+          measure of the concentrations of particles, which not only able to get
+          in our respiratory system, but also able to get into our bloodstream.
+          The effect can be far reaching from asthma to even heart attack.
+        </p>
+        <h2>Where can I get more information?</h2>
+        <p>The following websites give you more information:</p>
+        <ul>
+          <li>
+            <a
+              href="https://www.euro.who.int/__data/assets/pdf_file/0006/189051/Health-effects-of-particulate-matter-final-Eng.pdf"
+              >WHO Health Effects Of Particulate Matter</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://molekule.science/what-is-pm-2-5-and-how-can-you-reduce-your-exposure/"
+              >What Is PM 2.5 and How Can You Reduce Your Exposure?</a
+            >
+          </li>
+          <li>
+            <a href="https://blissair.com/what-is-pm-2-5.htm"
+              >What Is PM 2.5 and Why You Should Care</a
+            >
+          </li>
+        </ul>
+      </article>
     </main>
     <!-- The site uses your build, so the script tag should point to it at the end of the body tag -->
     <script src="./dist/bundle.js"></script>
