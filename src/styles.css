@@ -8,7 +8,7 @@ body {
   background-image: url("../assets/weather-background.jpg");
   background-color: #242424;
   background-position: center;
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -39,7 +39,8 @@ body {
   gap: 1em;
   border-radius: 0.5em;
   padding: 0.5em;
-  max-width: 600px;
+  max-width: 500px;
+  animation: linear fadeInWithSlide 1s;
 }
 
 .item {
@@ -76,7 +77,9 @@ body {
   margin: 0.5em;
 }
 
-h2 {
+.location,
+.weather,
+.polution {
   margin-top: 0;
 }
 
@@ -103,4 +106,95 @@ h2 {
   width: 255px;
   background: rgb(243, 243, 243);
   z-index: 10;
+  width: 0;
+  transition: width 1s;
+}
+
+.content {
+  color: #242424;
+  max-width: 500px;
+  margin: 0 auto;
+  animation: linear fadeInWithRollUp 1s;
+}
+
+.size-comparison-image {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5em;
+}
+
+ul {
+  list-style: none;
+}
+
+li > a {
+  text-decoration: none;
+  color: black;
+}
+
+li > a:hover {
+  color: rgb(97, 11, 109);
+}
+
+@media (min-width: 992px) {
+  main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2em;
+  }
+
+  .display {
+    margin: 7em 0 0 0;
+    width: 500px;
+  }
+
+  .content {
+    margin: 7em 0 0 0;
+  }
+}
+
+@keyframes fadeInWithSlide {
+  from {
+    transform: translateX(-7em);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 0.6;
+  }
+}
+
+@keyframes fadeInWithRollUp {
+  from {
+    opacity: 0;
+    transform: translateY(7em);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* classes to animate the pollution-bar cover*/
+.l-250 {
+  width: 250px;
+}
+
+.l-200 {
+  width: 200px;
+}
+
+.l-170 {
+  width: 170px;
+}
+
+.l-90 {
+  width: 90px;
+}
+
+.l-50 {
+  width: 50px;
 }

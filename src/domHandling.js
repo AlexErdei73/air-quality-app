@@ -35,23 +35,26 @@ export function render(appData) {
 
   pm2_5Div.textContent = `pm2.5 particulate concentration: ${pm2_5}`;
 
-  switch(true) {
+  let class_;
+  switch (true) {
+    case pm2_5 <= 12:
+      class_ = "l-250";
+      break;
     case pm2_5 > 12 && pm2_5 <= 35:
-      coverDiv.style.width = "200px";
+      class_ = "l-200";
       break;
     case pm2_5 > 35 && pm2_5 <= 55:
-      coverDiv.style.width = "170px";
+      class_ = "l-170";
       break;
     case pm2_5 > 55 && pm2_5 <= 150:
-      coverDiv.style.width = "90px";
+      class_ = "l-90";
       break;
     case pm2_5 > 150 && pm2_5 <= 250:
-      coverDiv.style.width = "50px";
-      break;
-    case pm2_5 > 250 && pm2_5 <= 500:
-      coverDiv.style.width = "0px";
+      class_ = "l-50";
       break;
   }
+  //Wait with animating the cover-bar until the main animation over
+  setTimeout(() => {
+    if (class_) coverDiv.classList.add(class_);
+  }, 1000);
 }
-  //const width = 300 - Math.round(pm2_5*1.4);
-  //coverDiv.style.width = `${width}px`;
