@@ -136,6 +136,18 @@ li > a:hover {
   color: rgb(97, 11, 109);
 }
 
+.map {
+  margin-top: 2em;
+  display: flex;
+}
+
+.map > iframe {
+  width: 200px;
+  height: 200px;
+  border-radius: 0.5em;
+  margin: auto;
+}
+
 @media (min-width: 992px) {
   main {
     display: flex;
@@ -151,6 +163,11 @@ li > a:hover {
 
   .content {
     margin: 7em 0 0 0;
+  }
+
+  .map > iframe {
+    width: 510px;
+    height: 510px;
   }
 }
 

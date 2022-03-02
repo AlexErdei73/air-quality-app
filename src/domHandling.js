@@ -1,3 +1,5 @@
+import { GOOGLE_API_KEY } from "./api";
+
 const latitudeDiv = document.querySelector(".latitude");
 const longitudeDiv = document.querySelector(".longitude");
 const countryCodeDiv = document.querySelector(".country-code");
@@ -10,6 +12,18 @@ const tempFarenheitDiv = document.querySelector(".temp-farenheit");
 
 const pm2_5Div = document.querySelector(".pm2_5");
 const coverDiv = document.querySelector(".cover");
+
+const mapSection = document.querySelector(".map");
+
+function createIframeElement(apiKey, coordinates) {
+  const iframeElement = document.createElement("iframe");
+  iframeElement.setAttribute("style", "border: 0");
+  iframeElement.setAttribute("loading", "lazy");
+  iframeElement.setAttribute("allowfullscreen", "true");
+  const src = `https://www.google.com/maps/embed/v1/view?zoom=10&center=${coordinates.latitude}, ${coordinates.longitude}&key=${apiKey}`;
+  iframeElement.setAttribute("src", src);
+  return iframeElement;
+}
 
 export function render(appData) {
   const {
@@ -34,6 +48,9 @@ export function render(appData) {
   tempFarenheitDiv.textContent = `temperature (Farenheit): ${tempF}`;
 
   pm2_5Div.textContent = `pm2.5 particulate concentration: ${pm2_5}`;
+
+  if (mapSection.firstChild) mapSection.removeChild(mapSection.firstChild);
+  mapSection.appendChild(createIframeElement(GOOGLE_API_KEY, coordinates));
 
   let class_;
   switch (true) {
