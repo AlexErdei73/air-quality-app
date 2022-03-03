@@ -1,5 +1,7 @@
 # air-quality-app
 
+### Making the map work: Put in the src folder the api.js file. This file should export the GOOGLE_API_KEY variable with a valid API KEY for the Google Map service.
+
 #### Description: A web app to show weather and air pollution levels at the user's location and searched locations using data from multiple APIs <br /> <br />
 
 ### _Must include:_
