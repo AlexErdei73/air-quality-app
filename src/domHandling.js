@@ -1,4 +1,4 @@
-import { GOOGLE_API_KEY } from "./api";
+import { GOOGLE_API_KEY } from "./apiKeys";
 
 const latitudeDiv = document.querySelector(".latitude");
 const longitudeDiv = document.querySelector(".longitude");
