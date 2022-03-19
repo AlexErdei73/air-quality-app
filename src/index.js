@@ -25,6 +25,12 @@ function getCoordinates() {
   return result;
 }
 
+//here you need to write your code to find the pollution and 
+//weather data of the nextCity and render it
+export function nextCity(input) {
+  console.log(input);
+}
+
 window.onload = () => {
    getAllData(budapestCoord).then((data) => {
      render(data);

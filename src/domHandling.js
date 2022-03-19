@@ -1,3 +1,4 @@
+import { nextCity } from ".";
 import { GOOGLE_API_KEY } from "./apiKeys";
 
 const latitudeDiv = document.querySelector(".latitude");
@@ -13,6 +14,49 @@ const tempFarenheitDiv = document.querySelector(".temp-farenheit");
 const pm2_5Div = document.querySelector(".pm2_5");
 const coverDiv = document.querySelector(".cover");
 
+//code deals with the modal
+const modalDivs = document.querySelectorAll(".modal");
+const openCityModalBtn = document.querySelector(".openCityModalBtn");
+openCityModalBtn.addEventListener("click", openModal);
+const transparentDiv = document.querySelector(".transparent");
+const form = document.querySelector("form");
+form.addEventListener("click", (e) => {
+  e.stopPropagation();
+  return;
+});
+const closeBtn = document.querySelector("#close-btn");
+const cancelBtn = document.querySelector("#cancel-btn");
+transparentDiv.addEventListener("click", closeModal);
+closeBtn.addEventListener("click", closeModal);
+cancelBtn.addEventListener("click", closeModal);
+form.addEventListener("submit", handleSubmit);
+
+
+function openModal() {
+  modalDivs.forEach((div) => {
+    div.classList.add("show");
+  })
+}
+
+function closeModal() {
+  modalDivs.forEach((div) => {
+    div.classList.remove("show");
+  })
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const city = document.querySelector("#city").value;
+  const country = document.querySelector("#country").value;
+  const formData = {
+    city: city,
+    country: country,
+  }
+  nextCity(formData);
+  closeModal();
+}
+
+//code deals with the map
 const mapSection = document.querySelector(".map");
 
 function createIframeElement(apiKey, coordinates) {

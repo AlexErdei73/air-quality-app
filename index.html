@@ -96,17 +96,14 @@
         </ul>
       </article>
     </main>
-    <!-- The site uses your build, so the script tag should point to it at the end of the body tag -->
-    <script src="./dist/bundle.js"></script>
-  </body>
 
-  <!-- This is the modal -->
+    <!-- This is the modal -->
   <div class="modal modal-cover"></div>
   <div class="modal transparent">
     <form class="modal-form">
       <div class="headline">
         <h3>Another City</h3>
-        <button type="Button">X</button>
+        <button type="button" id="close-btn">X</button>
       </div>
       <div class="input">
         <label for="city">City</label>
@@ -117,9 +114,13 @@
         <input type="text" id="country" placeholder="Hungary" />
       </div>
       <div class="btn">
-        <button type="button">Cancel</button>
-        <button type="submit" className="submit" id="submit">Submit</button>
+        <button type="button" id="cancel-btn">Cancel</button>
+        <button type="submit" id="submit-btn">Submit</button>
       </div>
     </form>
   </div>
+
+    <!-- The site uses your build, so the script tag should point to it at the end of the body tag -->
+    <script src="./dist/bundle.js"></script>
+  </body>
 </html>

@@ -231,7 +231,7 @@ li > a:hover {
   padding: 5px 8px;
 }
 
-#submit {
+#submit-btn {
   color:rgb(243, 243, 243);
   background: dodgerblue;
   border: none;
@@ -239,7 +239,7 @@ li > a:hover {
   margin-right: -.5px;
 }
 
-#submit:hover {
+#submit-btn:hover {
   background: rgb(30, 120, 255);
 }
 
