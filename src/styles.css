@@ -148,34 +148,106 @@ li > a:hover {
   margin: auto;
 }
 
-.modal-cover {
-  display: flex;
+/* modal component styles */
+.modal-cover, .transparent {
+  display: none;
   width: 100vw;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
+}
+
+.modal-cover {
   background-color: black;
-  opacity: 0.9;
+  opacity: .7;
   z-index: 1;
+}
+
+.transparent {
+  background: transparent;
+  z-index: 2;
 }
 
 .modal-form {
   margin: auto;
   display: flex;
+  position: relative;
   flex-direction: column;
   background-color: rgb(243, 243, 243);
   opacity: 1;
-  padding: 3em;
+  padding: 3em 3em 1em;
   border-radius: 0.5em;
+}
+
+.headline {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: dodgerblue;
+  color:rgb(243, 243, 243);
+  border-radius: .5em .5em 0 0;
+  padding: 5px;
+}
+
+.headline > h3 {
+  margin: 0;
 }
 
 .input {
   display: flex;
   justify-content: space-between;
-  margin: 0.5em;
+  margin: .7em 0;
 }
 
+.input > label {
+  margin-right: .5em;
+  margin-top: 5px;
+}
+
+.input > input {
+  padding: 5px;
+}
+
+.headline > button {
+  border: none;
+  background: dodgerblue;
+  color:rgb(243, 243, 243);
+}
+
+.btn {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  margin: .7em 0 0;
+}
+
+.btn > button {
+  margin: .5em;
+  padding: 5px 8px;
+}
+
+#submit {
+  color:rgb(243, 243, 243);
+  background: dodgerblue;
+  border: none;
+  border-radius: 5px;
+  margin-right: -.5px;
+}
+
+#submit:hover {
+  background: rgb(30, 120, 255);
+}
+
+.show {
+  display: flex;
+}
+
+/* responsiveness, animations */
 @media (min-width: 992px) {
   main {
     display: flex;

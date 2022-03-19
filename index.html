@@ -101,8 +101,13 @@
   </body>
 
   <!-- This is the modal -->
-  <div class="modal-cover">
+  <div class="modal modal-cover"></div>
+  <div class="modal transparent">
     <form class="modal-form">
+      <div class="headline">
+        <h3>Another City</h3>
+        <button type="Button">X</button>
+      </div>
       <div class="input">
         <label for="city">City</label>
         <input type="text" id="city" placeholder="Budapest" />
@@ -113,7 +118,7 @@
       </div>
       <div class="btn">
         <button type="button">Cancel</button>
-        <button type="submit">Submit</button>
+        <button type="submit" className="submit" id="submit">Submit</button>
       </div>
     </form>
   </div>
