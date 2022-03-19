@@ -39,9 +39,13 @@ function openModal() {
 }
 
 function closeModal() {
-  modalDivs.forEach((div) => {
-    div.classList.remove("show");
-  })
+  form.style.animation = "linear fadeOutWithRollDown 1s";
+  setTimeout(() => {
+    modalDivs.forEach((div) => {
+      div.classList.remove("show");
+    });
+    form.style = "";
+  }, 1000);
 }
 
 function handleSubmit(e) {

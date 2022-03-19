@@ -178,6 +178,7 @@ li > a:hover {
   opacity: 1;
   padding: 3em 3em 1em;
   border-radius: 0.5em;
+  animation: linear fadeInWithRollUp 1s;
 }
 
 .headline {
@@ -292,6 +293,18 @@ li > a:hover {
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@keyframes fadeOutWithRollDown {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(7em);
   }
 }
 
