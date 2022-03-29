@@ -29,7 +29,7 @@ export function fetchJSON(url) {
         return data;
       })
       .catch((e) => console.error(e.message, e.code));
-};
+}
   
 function getWeatherFromJSON(JSON) {
     const weatherData = userData;

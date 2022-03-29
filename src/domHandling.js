@@ -38,7 +38,7 @@ function openModal() {
   })
 }
 
-function closeModal(city, country) {
+function closeModal() {
   form.style.animation = "linear fadeOutWithRollDown 1s";
   setTimeout(() => {
     modalDivs.forEach((div) => {
@@ -50,18 +50,18 @@ function closeModal(city, country) {
 
 function handleSubmit(e) {
   e.preventDefault();
-  let city = document.querySelector("#city").value;
-  let country = document.querySelector("#country").value;
+  const city = document.querySelector("#city").value;
+  const country = document.querySelector("#country").value;
 
   //could add some data validation here to handle an attempt to submit with an empty city field
   
-  
+
   const formData = {
     city: city,
     country: country,
   };
   nextCity(formData);
-  closeModal(city, country);
+  closeModal();
   form.reset();
 }
 
