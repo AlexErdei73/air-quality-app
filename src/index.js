@@ -1,6 +1,8 @@
 import "./styles.css";
-import { getAllData } from "./apiService";
+import { fetchJSON, getAllData } from "./apiService";
 import { render } from "./domHandling";
+import { OPENWEATHER_API_KEY } from "./apiKeys";
+import { getCodeByCountryName } from "./countryLookup";
 
 const budapestCoord = {
   latitude: 47.497913,
@@ -25,10 +27,20 @@ function getCoordinates() {
   return result;
 }
 
-//here you need to write your code to find the pollution and 
-//weather data of the nextCity and render it
-export function nextCity(input) {
-  console.log(input);
+export function nextCity (data) {
+  const countryCode = getCodeByCountryName(data.country);
+  const url = "http://api.openweathermap.org/geo/1.0/direct?q=" + data.city + "," + countryCode + "&limit=1&appid=" + OPENWEATHER_API_KEY;
+
+  fetchJSON(url).then((data) => {
+      const coordinates = {
+          latitude: data[0].lat,
+          longitude: data[0].lon,
+      };
+      getAllData(coordinates).then((data) => {
+          render(data);
+      });
+  })
+  .catch((e) => console.error(e.message, e.code));
 }
 
 window.onload = () => {

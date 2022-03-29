@@ -22,14 +22,14 @@ const apiQuery = {
     API_KEY: OPENWEATHER_API_KEY,
 };
   
-function fetchJSON(url) {
+export function fetchJSON(url) {
     return fetch(url, { mode: "cors" })
       .then((res) => res.json())
       .then((data) => {
         return data;
       })
       .catch((e) => console.error(e.message, e.code));
-  }
+}
   
 function getWeatherFromJSON(JSON) {
     const weatherData = userData;

@@ -1,4 +1,4 @@
-import { nextCity } from ".";
+import { nextCity } from "./index";
 import { GOOGLE_API_KEY } from "./apiKeys";
 
 const latitudeDiv = document.querySelector(".latitude");
@@ -52,12 +52,17 @@ function handleSubmit(e) {
   e.preventDefault();
   const city = document.querySelector("#city").value;
   const country = document.querySelector("#country").value;
+
+  //could add some data validation here to handle an attempt to submit with an empty city field
+  
+
   const formData = {
     city: city,
     country: country,
-  }
+  };
   nextCity(formData);
   closeModal();
+  form.reset();
 }
 
 //code deals with the map
@@ -118,8 +123,10 @@ export function render(appData) {
       class_ = "l-50";
       break;
   }
+
   //Wait with animating the cover-bar until the main animation over
   setTimeout(() => {
+    coverDiv.classList.remove("l-250", "l-200", "l-170", "l-90", "l-50");
     if (class_) coverDiv.classList.add(class_);
   }, 1000);
 }
