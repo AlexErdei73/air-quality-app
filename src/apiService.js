@@ -18,9 +18,14 @@ const apiQuery = {
     baseURLs: {
         weather: "https://api.openweathermap.org/data/2.5/weather?lat=",
         pollution: "https://api.openweathermap.org/data/2.5/air_pollution?lat=",
+        nextCity: "http://api.openweathermap.org/geo/1.0/direct?q=",
     },
     API_KEY: OPENWEATHER_API_KEY,
 };
+
+export function makeNextCityURL (city, countryCode, stateCode) {
+    return  (apiQuery.baseURLs.nextCity + city + "," + stateCode + "," + countryCode + "&limit=5&appid=" + apiQuery.API_KEY);
+}
   
 export function fetchJSON(url) {
     return fetch(url, { mode: "cors" })

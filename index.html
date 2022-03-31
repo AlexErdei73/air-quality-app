@@ -107,11 +107,15 @@
       </div>
       <div class="input">
         <label for="city">City</label>
-        <input type="text" id="city" placeholder="Budapest" />
+        <input type="text" id="city" placeholder="Syracuse" />
       </div>
       <div class="input">
         <label for="country">Country</label>
-        <input type="text" id="country" placeholder="Hungary" />
+        <input type="text" id="country" placeholder="United States" />
+      </div>
+      <div class="input">
+        <label for="state">State (US only)</label>
+        <input type="text" id="state" placeholder="NY" maxlength="2" oninput="this.value = this.value.toUpperCase()" />
       </div>
       <div class="btn">
         <button type="button" id="cancel-btn">Cancel</button>

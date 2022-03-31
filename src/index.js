@@ -1,7 +1,6 @@
 import "./styles.css";
-import { fetchJSON, getAllData } from "./apiService";
+import { makeNextCityURL, fetchJSON, getAllData } from "./apiService";
 import { render } from "./domHandling";
-import { OPENWEATHER_API_KEY } from "./apiKeys";
 import { getCodeByCountryName } from "./countryLookup";
 
 const budapestCoord = {
@@ -29,9 +28,11 @@ function getCoordinates() {
 
 export function nextCity (data) {
   const countryCode = getCodeByCountryName(data.country);
-  const url = "http://api.openweathermap.org/geo/1.0/direct?q=" + data.city + "," + countryCode + "&limit=1&appid=" + OPENWEATHER_API_KEY;
-
+  console.log(countryCode);
+  const url = makeNextCityURL(data.city, countryCode, data.state);
+  
   fetchJSON(url).then((data) => {
+      console.log(data);
       const coordinates = {
           latitude: data[0].lat,
           longitude: data[0].lon,
