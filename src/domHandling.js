@@ -52,13 +52,11 @@ function handleSubmit(e) {
   e.preventDefault();
   const city = document.querySelector("#city").value;
   const country = document.querySelector("#country").value;
-
-  //could add some data validation here to handle an attempt to submit with an empty city field
-  
-
+  const state = document.querySelector("#state").value;  
   const formData = {
     city: city,
     country: country,
+    state: state,
   };
   nextCity(formData);
   closeModal();
