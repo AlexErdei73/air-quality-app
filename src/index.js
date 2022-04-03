@@ -26,35 +26,41 @@ function getCoordinates() {
   return result;
 }
 
-export function nextCity (data) {
+export function nextCity(data) {
   const countryCode = getCodeByCountryName(data.country);
-  console.log(countryCode);
   const url = makeNextCityURL(data.city, countryCode, data.state);
-  
-  fetchJSON(url).then((data) => {
-      console.log(data);
+
+  fetchJSON(url)
+    .then((data) => {
       const coordinates = {
-          latitude: data[0].lat,
-          longitude: data[0].lon,
+        latitude: data[0].lat,
+        longitude: data[0].lon,
       };
-      getAllData(coordinates).then((data) => {
-          render(data);
-      });
-  })
-  .catch((e) => console.error(e.message, e.code));
+      return coordinates;
+    })
+    .then((coordinates) => {
+      return getAllData(coordinates);
+    })
+    .then((data) => {
+      render(data);
+    })
+    .catch((e) => console.error(e.message, e.code));
 }
 
-window.onload = () => {
-   getAllData(budapestCoord).then((data) => {
-     render(data);
-   }).then(async function() {
-      await new Promise(resolve => setTimeout(resolve, 3000));
-    }).then(() => {
-      getCoordinates().then((coord) => {
-        getAllData(coord).then((data) => {
-          render(data);
-        });
-      });
-   });
-};
-
+getAllData(budapestCoord)
+  .then((data) => {
+    render(data);
+  })
+  .then(async function () {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+  })
+  .then(() => {
+    return getCoordinates();
+  })
+  .then((coord) => {
+    return getAllData(coord);
+  })
+  .then((data) => {
+    render(data);
+  })
+  .catch((e) => console.error(e.message, e.code));
