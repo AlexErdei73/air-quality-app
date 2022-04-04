@@ -149,7 +149,8 @@ li > a:hover {
 }
 
 /* modal component styles */
-.modal-cover, .transparent {
+.modal-cover,
+.transparent {
   display: none;
   width: 100vw;
   height: 100vh;
@@ -160,7 +161,7 @@ li > a:hover {
 
 .modal-cover {
   background-color: black;
-  opacity: .7;
+  opacity: 0.7;
   z-index: 1;
 }
 
@@ -190,8 +191,8 @@ li > a:hover {
   top: 0;
   left: 0;
   background-color: dodgerblue;
-  color:rgb(243, 243, 243);
-  border-radius: .5em .5em 0 0;
+  color: rgb(243, 243, 243);
+  border-radius: 0.5em 0.5em 0 0;
   padding: 5px;
 }
 
@@ -202,11 +203,11 @@ li > a:hover {
 .input {
   display: flex;
   justify-content: space-between;
-  margin: .7em 0;
+  margin: 0.7em 0;
 }
 
 .input > label {
-  margin-right: .5em;
+  margin-right: 0.5em;
   margin-top: 5px;
 }
 
@@ -217,27 +218,27 @@ li > a:hover {
 .headline > button {
   border: none;
   background: dodgerblue;
-  color:rgb(243, 243, 243);
+  color: rgb(243, 243, 243);
 }
 
 .btn {
   display: flex;
   width: 100%;
   justify-content: flex-end;
-  margin: .7em 0 0;
+  margin: 0.7em 0 0;
 }
 
 .btn > button {
-  margin: .5em;
+  margin: 0.5em;
   padding: 5px 8px;
 }
 
 #submit-btn {
-  color:rgb(243, 243, 243);
+  color: rgb(243, 243, 243);
   background: dodgerblue;
   border: none;
   border-radius: 5px;
-  margin-right: -.5px;
+  margin-right: -0.5px;
 }
 
 #submit-btn:hover {

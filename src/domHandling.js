@@ -31,11 +31,10 @@ closeBtn.addEventListener("click", closeModal);
 cancelBtn.addEventListener("click", closeModal);
 form.addEventListener("submit", handleSubmit);
 
-
 function openModal() {
   modalDivs.forEach((div) => {
     div.classList.add("show");
-  })
+  });
 }
 
 function closeModal() {
@@ -52,7 +51,7 @@ function handleSubmit(e) {
   e.preventDefault();
   const city = document.querySelector("#city").value;
   const country = document.querySelector("#country").value;
-  const state = document.querySelector("#state").value;  
+  const state = document.querySelector("#state").value;
   const formData = {
     city: city,
     country: country,
@@ -125,6 +124,8 @@ export function render(appData) {
   //Wait with animating the cover-bar until the main animation over
   setTimeout(() => {
     coverDiv.classList.remove("l-250", "l-200", "l-170", "l-90", "l-50");
-    if (class_) coverDiv.classList.add(class_);
+    setTimeout(() => {
+      if (class_) coverDiv.classList.add(class_);
+    }, 1000);
   }, 1000);
 }
