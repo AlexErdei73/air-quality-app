@@ -1,18 +1,33 @@
 import { nextCity } from "./index";
 import { GOOGLE_API_KEY } from "./apiKeys";
+import pollutionBarPNG from "./assets/pollution-bar.png";
+import pm2_5GraphicJPG from "./assets/pm2.5_scale_graphic-color_2.jpg";
 
 const latitudeDiv = document.querySelector(".latitude");
 const longitudeDiv = document.querySelector(".longitude");
 const countryCodeDiv = document.querySelector(".country-code");
 const countryNameDiv = document.querySelector(".country-name");
-
 const cityDiv = document.querySelector(".city");
 const conditionDiv = document.querySelector(".condition");
 const tempCelsiusDiv = document.querySelector(".temp-celsius");
 const tempFarenheitDiv = document.querySelector(".temp-farenheit");
-
 const pm2_5Div = document.querySelector(".pm2_5");
 const coverDiv = document.querySelector(".cover");
+
+//code that deals with adding images to dom
+const pollutionBar = document.querySelector(".pollution-bar");
+const contentArea = document.querySelector(".content");
+
+const pollutionBarImage = document.createElement("img");
+pollutionBarImage.src = pollutionBarPNG;
+pollutionBarImage.alt = "color bar to meter pm2.5 particulate concentration";
+pollutionBar.appendChild(pollutionBarImage);
+
+const contentAreaImage = document.createElement("img");
+contentAreaImage.src = pm2_5GraphicJPG;
+contentAreaImage.alt = "image comparing the size of a pm2.5 particle to the size of the human hair";
+contentAreaImage.classList.add("size-comparison-image");
+contentArea.appendChild(contentAreaImage);
 
 //code deals with the modal
 const modalDivs = document.querySelectorAll(".modal");
@@ -47,19 +62,35 @@ function closeModal() {
   }, 1000);
 }
 
+const country = document.querySelector("#country");
+const stateRow = document.querySelector("#state-row");
+country.addEventListener("keyup", e => {
+  if (country.value == "United States"){
+    stateRow.classList.remove("input-hidden");
+    stateRow.classList.add("input");
+  }
+  else {
+    stateRow.classList.remove("input");
+    stateRow.classList.add("input-hidden");
+  }
+});
+
 function handleSubmit(e) {
   e.preventDefault();
   const city = document.querySelector("#city").value;
-  const country = document.querySelector("#country").value;
+  const countryName = country.value;
   const state = document.querySelector("#state").value;
+
   const formData = {
     city: city,
-    country: country,
+    country: countryName,
     state: state,
   };
   nextCity(formData);
   closeModal();
   form.reset();
+  stateRow.classList.remove("input");
+  stateRow.classList.add("input-hidden");
 }
 
 //code deals with the map
@@ -97,7 +128,7 @@ export function render(appData) {
   tempCelsiusDiv.textContent = `temperature (Celsius): ${tempC}`;
   tempFarenheitDiv.textContent = `temperature (Farenheit): ${tempF}`;
 
-  pm2_5Div.textContent = `pm2.5 particulate concentration: ${pm2_5}`;
+  pm2_5Div.textContent = `pm2.5 reading: ${pm2_5} µg/m³`;
 
   if (mapSection.firstChild) mapSection.removeChild(mapSection.firstChild);
   mapSection.appendChild(createIframeElement(GOOGLE_API_KEY, coordinates));
