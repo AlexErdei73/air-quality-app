@@ -33,10 +33,6 @@
             <h2 class="item pollution">Pollution</h2>
             <div class="item pm2_5"></div>
             <div class="pollution-bar">
-              <img
-                src="./assets/pollution-bar.png"
-                alt="color bar to meter pm2.5 particulate concentration"
-              />
               <div class="cover"></div>
             </div>
           </section>
@@ -54,11 +50,6 @@
           micrometers in diameter – making it 30 times larger than the largest
           fine particle.
         </p>
-        <img
-          src="./assets/pm2.5_scale_graphic-color_2.jpg"
-          alt="image comparing the 2.5mikron size to the size of the human hair (70 mikron)"
-          class="size-comparison-image"
-        />
         <h2>What is the source of PM2.5?</h2>
         <p>
           The main source of air pollution including PM2.5 is human activities
@@ -107,14 +98,14 @@
       </div>
       <div class="input">
         <label for="city">City</label>
-        <input type="text" id="city" placeholder="Syracuse" />
+        <input type="text" id="city" placeholder="Syracuse" required />
       </div>
       <div class="input">
         <label for="country">Country</label>
         <input type="text" id="country" placeholder="United States" />
       </div>
-      <div class="input">
-        <label for="state">State (US only)</label>
+      <div id="state-row" class="input-hidden">
+        <label for="state">State</label>
         <input type="text" id="state" placeholder="NY" maxlength="2" oninput="this.value = this.value.toUpperCase()" />
       </div>
       <div class="btn">

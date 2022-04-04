@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  background-image: url("../assets/weather-background.jpg");
+  background-image: url("./assets/weather-background.jpg");
   background-color: #242424;
   background-position: center;
   background-size: cover;
@@ -83,17 +83,17 @@ body {
   margin-top: 0;
 }
 
-.pollution-bar img {
+.pollution-bar {
+  position: relative;
+  z-index: -1;
+}
+
+.pollution-bar > img {
   width: 300px;
   height: auto;
   margin: auto;
   border: 2px solid rgb(243, 243, 243);
   border-radius: 3px;
-  position: relative;
-  z-index: -1;
-}
-
-.pollution-bar {
   position: relative;
   z-index: -1;
 }
@@ -213,6 +213,10 @@ li > a:hover {
 
 .input > input {
   padding: 5px;
+}
+
+.input-hidden {
+  display: none;
 }
 
 .headline > button {
