@@ -20,7 +20,7 @@ const apiQuery = {
     pollution: "https://api.openweathermap.org/data/2.5/air_pollution?lat=",
     nextCity: "https://api.openweathermap.org/geo/1.0/direct?q=",
   },
-  API_KEY: OPENWEATHER_API_KEY,
+  API_KEY: OPENWEATHER_API_KEY,--
 };
 
 export function makeNextCityURL(city, countryCode, stateCode) {
