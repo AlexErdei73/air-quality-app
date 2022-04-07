@@ -2,6 +2,7 @@ import { nextCity } from "./index";
 import { GOOGLE_API_KEY } from "./apiKeys";
 import pollutionBarPNG from "./assets/pollution-bar.png";
 import pm2_5GraphicJPG from "./assets/pm2.5_scale_graphic-color_2.jpg";
+import favicon from "./assets/icon.ico";
 
 const latitudeDiv = document.querySelector(".latitude");
 const longitudeDiv = document.querySelector(".longitude");
@@ -13,6 +14,12 @@ const tempCelsiusDiv = document.querySelector(".temp-celsius");
 const tempFarenheitDiv = document.querySelector(".temp-farenheit");
 const pm2_5Div = document.querySelector(".pm2_5");
 const coverDiv = document.querySelector(".cover");
+
+//adding the favicon
+var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+link.type = 'image/x-icon';
+link.href = favicon;
+document.getElementsByTagName('head')[0].appendChild(link);
 
 //code that deals with adding images to dom
 const pollutionBar = document.querySelector(".pollution-bar");
